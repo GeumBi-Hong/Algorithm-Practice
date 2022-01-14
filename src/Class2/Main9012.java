@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-//괄호
+//9012번 괄호
 public class Main9012 {
     public static void main(String[] args) throws IOException {
 

@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.*;
-//연구실 (너비우선 탐색 , 완전 탐색)
+//연구소 (너비우선 탐색 , 완전 탐색)
 public class Main14502 {
 
     static  int [][] a ,virus_array ;

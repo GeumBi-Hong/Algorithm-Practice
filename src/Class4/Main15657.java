@@ -1,10 +1,12 @@
+package Class4;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
 import java.util.Arrays;
 import java.util.StringTokenizer;
-
+//N과 M (8)  (백트레킹)
 public class Main15657{
     static int [] array ;
     static int []answer;

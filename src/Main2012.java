@@ -1,7 +1,7 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-
+//등수 매기기
 public class Main2012 {
     public static void main(String[] args) throws IOException {
 

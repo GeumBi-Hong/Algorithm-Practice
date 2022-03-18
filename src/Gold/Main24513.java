@@ -7,7 +7,7 @@ import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.StringTokenizer;
-//좀비 바이러스 -너비우선
+//좀비 바이러스 -그래프 탐색
 public class Main24513 {
 
     static int[][] village;
@@ -84,7 +84,7 @@ public class Main24513 {
                     village[nx][ny] = village[x][y];
                     hour[nx][ny] = hour[x][y]+1;
                     queue.add(new Dot(nx,ny));
-                }else if (hour[nx][ny]>=0){//했던 경우
+                }else if (hour[nx][ny]>0){//했던 경우
                     if(hour[nx][ny]==hour[x][y]+1 && village[nx][ny]!=village[x][y]){
                         village[nx][ny]=3;
 

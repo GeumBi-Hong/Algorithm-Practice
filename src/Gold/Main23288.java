@@ -7,7 +7,7 @@ import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.StringTokenizer;
-
+// 주사위 굴리기 2
 public class Main23288 {
 
     static class Dot {

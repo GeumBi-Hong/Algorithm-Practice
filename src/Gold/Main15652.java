@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
-
+//N 과 M (4)
 public class Main15652 {
     static  int N,M;
     static int [] arr;

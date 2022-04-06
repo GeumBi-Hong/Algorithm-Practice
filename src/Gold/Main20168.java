@@ -4,7 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.StringTokenizer;
-//골목대장 호석 - 기능성 (인접행렬)
+//골목대장 호석-기능성 (인접행렬)
 public class Main20168 {
 
     static int[][] map;

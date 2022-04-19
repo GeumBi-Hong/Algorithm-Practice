@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 import java.util.Collections;
 import java.util.StringTokenizer;
-
+//휴게소 세우기
 public class Main1477 {
 
     static int N,L;

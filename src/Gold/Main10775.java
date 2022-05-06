@@ -3,7 +3,7 @@ package Gold;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-
+//공항
 public class Main10775 {
     static int[] airport;
     public static void main(String[] args) throws IOException {

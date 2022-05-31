@@ -6,8 +6,8 @@ import java.io.InputStreamReader;
 import java.util.StringTokenizer;
 //N 과 M (4)
 public class Main15652 {
-    static  int N,M;
-    static int [] arr;
+    static int N,M;
+    static int num [];
     static StringBuilder sb = new StringBuilder();
     public static void main(String[] args) throws IOException {
 
@@ -17,7 +17,7 @@ public class Main15652 {
         N = Integer.parseInt(st.nextToken());
         M = Integer.parseInt(st.nextToken()); //출력 수
 
-        arr= new int[M];
+        num= new int[M];
 
         backTracking(0,1);
 
@@ -28,7 +28,7 @@ public class Main15652 {
     public static void backTracking(int depth ,int start){
 
         if(depth==M){
-            for(int n : arr){
+            for(int n : num){
                 sb.append(n).append(" ");
             }
             sb.append("\n");
@@ -36,7 +36,7 @@ public class Main15652 {
         }
 
         for(int i = start ; i<=N;i++){
-            arr[depth]=i;
+            num[depth]=i;
             backTracking(depth+1,i);
         }
     }

@@ -43,10 +43,9 @@ public class Main15686 {
         }
 
 
-        for(int i = 1; i<=M;i++){ //최대 M개
-            int []index = new int[i];
-            backTracking(0,0,i,index);
-        }
+            int []index = new int[M];
+            backTracking(0,0,M,index);
+
 
         System.out.println(answer);
 

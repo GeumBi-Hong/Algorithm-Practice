@@ -1,82 +1,69 @@
-package Sliver;
+package Silver;
+
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.StringTokenizer;
+import java.util.*;
 
 public class Main10815 {
 
-    static ArrayList<Integer> num = new ArrayList<>();
-    static ArrayList<Integer> check = new ArrayList<>();
+    static List<Integer> num_List = new ArrayList<>();
+    static List<Integer> check_List = new ArrayList<>();
+
     static int N,M;
-    static int [] answer ;
     public static void main(String[] args) throws IOException {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st;
         StringBuilder sb = new StringBuilder();
         N = Integer.parseInt(br.readLine());
-
-        st = new StringTokenizer(br.readLine(), " ");
-        while (st.hasMoreTokens()){
-            num.add(Integer.parseInt(st.nextToken()));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        for(int i = 0 ; i <N;i++){
+            int n = Integer.parseInt(st.nextToken());
+            num_List.add(n);
         }
 
-
-       M = Integer.parseInt(br.readLine());
-        st = new StringTokenizer(br.readLine(), " ");
-        while (st.hasMoreTokens()){
-            check.add(Integer.parseInt(st.nextToken()));
+        M = Integer.parseInt(br.readLine());
+       int [] answer = new int[M];
+        st = new StringTokenizer(br.readLine());
+        for(int i = 0 ; i <M;i++){
+            int n = Integer.parseInt(st.nextToken());
+            check_List.add(n);
         }
 
-
-        //이진 탐색은 데이터가 정렬되어있어여함.
-        Collections.sort(num);
-       // Collections.sort(check);
-
-        answer = new int[M];
-
-        //이진 탐색
+        //이분 탐색을 위해 정렬
+        Collections.sort(num_List);
 
 
-
-        //check배열 돌면서
-        for(int i = 0 ; i < M;i++){
-           if(BinarySearch(check.get(i),0,num.size()-1)){//찾았다면 1
-               answer[i]=1;
-           }
+        for(int i = 0 ; i < check_List.size();i++){
+            if(BinarySearch(check_List.get(i))){ //수가 존재하면 1 그렇지 않으면 0
+                answer [i]= 1;
+            }
         }
 
-        for(int i = 0 ; i < M;i++){
-            sb.append(answer[i]+" ");
+        for(int n : answer){
+            sb.append(n+" ");
         }
-
-        System.out.print(sb);
-
-
+        System.out.println(sb);
     }
 
-    public static boolean BinarySearch(int searchItem,int low,int high){
 
-        int mid ;
 
-        while (low <=high){
-            mid = (low+high)/2;
+    private static boolean BinarySearch(int ans){
 
-            //값을 찾았다면
-            if(searchItem==num.get(mid)){
-                return true;
-            }else if(searchItem<num.get(mid)){
-                high = mid -1;
-            }else {
-                low = mid+1;
-            }
+        int left = 0;
+        int right = num_List.size()-1;
+
+        while (left<=right){
+            int midIndex = (left+right)/2;
+            int mid = num_List.get(midIndex);
+            if(mid<ans)left=midIndex+1;
+            else if(mid>ans)right=midIndex-1;
+            else return true;
+
 
         }
-        //못찾았다면
-        return false;
+
+       return false;
     }
 }

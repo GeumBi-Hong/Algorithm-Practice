@@ -6,7 +6,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-
+//기념품
 public class Main12873 {
 
     public static void main(String[] args)  throws IOException {

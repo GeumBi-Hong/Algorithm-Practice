@@ -1,5 +1,4 @@
 package Gold;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -7,7 +6,7 @@ import java.util.ArrayList;
 import java.util.PriorityQueue;
 import java.util.StringTokenizer;
 
-public class Main17396 {
+public class Main17396{
 
     static class Node {
         int idx;
@@ -18,6 +17,8 @@ public class Main17396 {
             this.cost = cost;
         }
     }
+
+    static long MAX_VALUE = 9999900001L;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -42,7 +43,7 @@ public class Main17396 {
         ArrayList<Node> [] graph = new ArrayList[N];
 
         for(int i = 0 ; i < N ; i++){
-           graph[i] = new ArrayList<Node>();
+            graph[i] = new ArrayList<Node>();
         }
 
 
@@ -61,8 +62,8 @@ public class Main17396 {
 
         long dist = dijkstra(N,graph,isShow);
 
-        // dist 가 Long.MAX_VALUE 라면 넥서스 까지 가지 못하는 경우이기때문에 -1를 출력하고 그렇지 않으면 최소비용을 출력한다.
-        System.out.println(dist==Long.MAX_VALUE?"-1":dist);
+        // dist 가 MAX_VALUE 라면 넥서스 까지 가지 못하는 경우이기때문에 -1를 출력하고 그렇지 않으면 최소비용을 출력한다.
+        System.out.println(dist==MAX_VALUE?"-1":dist);
     }
 
 
@@ -76,7 +77,7 @@ public class Main17396 {
         //이렇게 되었을때 최악의 경우 10만 * 약 10 만 = 100억 의 비용이 발생하기때문에 long형으로 선언해야한다.
         long [] dist = new long[N];
         for(int i = 0; i < N; i++){
-            dist[i] = Long.MAX_VALUE;
+            dist[i] = MAX_VALUE;
 
         }
 
@@ -88,16 +89,20 @@ public class Main17396 {
             Node currNode = queue.poll();
 
 
-            // 해당 정점에 들어 오기 전에 적에게 시야가 들키는 정점이라면 오지못한다.
-            //그런데 넥서스에 도착은 할 수 있다.
-            if(isShow[currNode.idx] && currNode.idx!=N-1)continue;
+
+            //도착지점에 오면 break;
+            if(currNode.idx==N-1)break;
             if(dist[currNode.idx] < currNode.cost) continue;
 
 
             for(int i = 0 ; i< graph[currNode.idx].size();i++){
+
                 Node nxtNode = graph[currNode.idx].get(i);
 
-                if(dist[nxtNode.idx] > dist[currNode.idx]+ nxtNode.cost){
+                //만약 다음 이동할 노드가 적에 시야에 보인다면 탐색하지 않는다. 넥서스의 경우 이동가능
+                if(isShow[nxtNode.idx] && nxtNode.idx!=N-1)continue;
+
+                if(dist[nxtNode.idx] > dist[currNode.idx]+ nxtNode.cost ){
                     dist[nxtNode.idx] = dist[currNode.idx]+ nxtNode.cost;
                     queue.offer(new Node(nxtNode.idx,dist[nxtNode.idx]));
 

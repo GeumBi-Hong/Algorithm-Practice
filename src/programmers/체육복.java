@@ -3,7 +3,7 @@ package programmers;
 import java.util.*;
 
 public class 체육복 {
-
+//1
         public int solution(int n, int[] lost, int[] reserve) {
             int answer =0;
             int count = 0; //빌린 학생 수

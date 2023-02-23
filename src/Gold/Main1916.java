@@ -81,8 +81,8 @@ public class Main1916 {
     private static void dijkstra (int start){
 
         //우선순위 큐 -> 최소 비용으로 정렬
-         PriorityQueue <Node> queue = new PriorityQueue<>();
-       // PriorityQueue <Node> queue = new PriorityQueue<Node>((o1,o2)->Integer.compare(o1.cost,o2.cost));
+        // PriorityQueue <Node> queue = new PriorityQueue<>();
+        PriorityQueue <Node> queue = new PriorityQueue<Node>((o1,o2)->Integer.compare(o1.cost,o2.cost));
         //첫 노드는 시작점 ,  비용은 0이다.
         queue.add(new Node(start,0));
 

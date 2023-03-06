@@ -1,6 +1,8 @@
+package programmers;
+
 import java.util.*;
 
-class 오픈채팅방 {
+public class 오픈채팅방 {
     public String[] solution(String[] record) {
         
         List<String> listString = new ArrayList<>();

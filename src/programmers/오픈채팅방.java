@@ -1,6 +1,6 @@
 import java.util.*;
 
-class Solution {
+class 오픈채팅방 {
     public String[] solution(String[] record) {
         
         List<String> listString = new ArrayList<>();

@@ -31,7 +31,7 @@ import java.util.PriorityQueue;
  * 이렇게 딱 중간 힙을 유지하는게 key point 였다...
  */
 
-public class Main12865 {
+public class Main1655 {
 
     public static void main(String[] args)  throws IOException {
 
@@ -53,13 +53,11 @@ public class Main12865 {
 
 
             if(!minHeap.isEmpty() && !maxHeap.isEmpty() && minHeap.peek() < maxHeap.peek()) {
-
                 int temp = minHeap.poll();
                 minHeap.add(maxHeap.poll());
                 maxHeap.add(temp);
             }
             sb.append(maxHeap.peek() + "\n");
-
 
         }
 

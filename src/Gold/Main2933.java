@@ -1,6 +1,5 @@
 package Gold;
 
-import programmers.네트워크BFS;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -13,14 +12,11 @@ import java.util.StringTokenizer;
 /**
  * 미네랄
  *
- * 1. 왼쪽 or 오른쪽 차례로 막대를 던진다.
- * 2-1. 미네랄을 맞췄다 : 바닥에 있는 애를 기준으로 방문체크 (공중에 떠있지 않는 클러스터)
+ *  왼쪽 or 오른쪽 차례로 막대를 던진다.
+ * 미네랄을 맞췄다 : 바닥에 있는 애를 기준으로 방문체크 (공중에 떠있지 않는 클러스터)
  * 그럼 나머지 애들이 지금 공중에 떠있다고 봐도됨
- * 하나씩 체크해서 몇 만큼 아래로 갈 수 있는지 체크 ( 체크하면서 배열에 저장)
+ * 한칸씩 아래로 이동시키면서 이동시킬수 있을때까지 움직인다.
  *
- * 3-1. 공중에 떠있다면:
- * 3-2. 공중에 떠있지 않다면  , 결국엔 x좌표가 R이냐?
- * 2-2. 미네랄이 없다 : 그냥 넘어감
  *
  */
 public class Main2933 {
@@ -42,7 +38,6 @@ public class Main2933 {
     static int[] dr = {0,0,-1,1};
     static int[] dc = {1,-1,0,0};
 
-    static int[] height;
     public static void main(String[] args) throws IOException {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -53,10 +48,9 @@ public class Main2933 {
 
         //미네랄 Map
         map = new char[R][C];
-        //
+        //방문 체크
         isVisited = new boolean[R][C];
 
-        //미네랄 map에 초기값 저장
         for(int r = 0; r < R; r++){
            String str = br.readLine();
             for(int c = 0; c < C; c++){
@@ -68,30 +62,20 @@ public class Main2933 {
         N = Integer.parseInt(br.readLine());
         st = new StringTokenizer(br.readLine());
 
-
         /** 막대 던지기 시작 **/
         for(int i = 1 ; i <=N; i++){
             int height = R - Integer.parseInt(st.nextToken());
 
             int col = throwStick(i,height);
-           // printMap();
-            //미네랄이 깨졌다면 공중에 떠있는 클러스터가 있는지 확인한다.
-            if(col!=-1){
-              //  System.out.println("미네랄깨");
+            //미네랄이 깨졌다면 공중에 떠있는 클러스터가 있는지 확인하고 아래로 떨군다.
+            if(col != -1){
                 checkCluster();
             }
 
         }
 
         System.out.println(answer());
-
-
-
-        //System.out.println("@@@@[정답]@@@");
-       // printMap();
     }
-
-    /** map출력**/
     private static void printMap (){
 
         for(int r= 0; r<R ;r++){
@@ -100,25 +84,20 @@ public class Main2933 {
             }
             System.out.println();
         }
-
-       // System.out.println("@@@@@@@@@@@@@");
     }
 
 
     private static String answer (){
         StringBuilder sb = new StringBuilder();
 
-        for(int r= 0; r<R ;r++){
-            for(int c=0;c<C;c++){
+        for(int r= 0; r < R ;r++){
+            for(int c=0; c < C ;c++){
                 sb.append(map[r][c]);
             }
             sb.append("\n");
         }
-
-
         return sb.toString();
     }
-
 
 
     /** 막대기 던지기 **/
@@ -151,6 +130,7 @@ public class Main2933 {
         return col;
     }
 
+    /** 클러스터 확인하기 **/
     private static void checkCluster(){
         isVisited = new boolean[R][C];
 
@@ -162,9 +142,7 @@ public class Main2933 {
             }
         }
 
-        //그렇지 않고 떠있는 클러스터 하나씩 찾아서
-
-        int maxHeight = Integer.MAX_VALUE;
+        //그렇지 않고 떠있는 클러스터 하나씩 찾아서 리스트에 저장
 
         ArrayList<Dot> arrayList = new ArrayList<>();
 
@@ -174,19 +152,12 @@ public class Main2933 {
                 if(!isVisited[r][c] && map[r][c] == 'x'){
                     arrayList.add(new Dot(r,c));
                     map[r][c] = '.';
-
-//                    System.out.println("공중 미네랄 좌표:"+r+" "+c);
-//                    //해당 좌표가 얼마나 아래까지 내려갈 수 있는지 구하기
-//
-//                    int sub = findMaxHeight(r,c);
-//                    if(sub > 1){
-//                        System.out.println(r+" "+c+" "+maxHeight);
-//                        maxHeight = Math.min(sub,maxHeight);
-//                    }
                 }
             }
         }
         if(arrayList.isEmpty()) return;
+
+        /** 얼만큼 아래로 이동할 수 있는지 공중에 떠있는 클러스터 좌표를 한칸씩 아래로 이동시킨다 갈 수 없는 경우는 이동하지 않고 빠져나온다.*/
         boolean canMove = true;
         while (canMove){
             for (Dot dot : arrayList) {
@@ -204,47 +175,13 @@ public class Main2933 {
                     dot.r++;
                 }
             }
-           // System.out.println("S");
         }
 
-
-
-
-
-    //이동 시키기
+    /**   이동 시킬 좌표로 미네랄 이동 **/
         for (Dot dot : arrayList) {
             map[dot.r][dot.c] = 'x';
-
-            //  System.out.println("얼마나 이동:?"+maxHeight);
-            //System.out.println("몇개 이동 시켜야댐?"+arrayList.size());
-
-
         }
 
-    }
-
-    /** 해당 좌표가 얼마나 아래까지 내려갈 수 있는지 구하기 **/
-    private static int findMaxHeight(int r, int c) {
-        System.out.println("높이찾ㄱ");
-        int s = R-1 - r;
-
-        for (int i = r + 1; i < R; i++) {
-          //  System.out.println(i);
-
-            if ( map[i][c] == 'x') {
-
-
-              //  System.out.println();
-            //    System.out.println("@@+"+" "+i+" "+r+" "+s);
-                s = i - r ;
-                System.out.println("@@+"+" "+i+" "+r+" "+s);
-            //    System.out.println("@@+"+" "+s);
-                break;
-
-        }
-
-    }
-        return s;
     }
     /** 너비 우선 탐색 **/
     private static void bfs (int r ,int c){

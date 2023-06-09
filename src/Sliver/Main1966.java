@@ -50,6 +50,7 @@ public class Main1966 {
              *  max = 먼저 나와야할 문서의 우선순위
              *  count = 1; 출력된 문서의 개수  (몇번째로 나오는지 체크하기 위해 만듬)
              */
+
             int index =0;
             int max = numArray[index];
             int count = 1;
@@ -59,7 +60,7 @@ public class Main1966 {
                     //1.맨앞에 있는 문서에 대한 정보를 가져온다.
                     int[] doc = queue.peek();
 
-                    if(doc[0]==max){ //doc[0]이 (우선순위) 가장 높은 우선순위라면 꺼낸다.
+                    if(doc[0] == max){ //doc[0]이 (우선순위) 가장 높은 우선순위라면 꺼낸다.
 
                         //답을 찾았으니 꺼낸다.
                         queue.poll();
@@ -70,7 +71,7 @@ public class Main1966 {
                             break;
                         }else{
                             index++;
-                            max = numArray[index];
+                            max = numArray[index]; //numArray는 내림차순을 했음 따라서 그 다음 우선순위를 알 수 있게 한거
                             count++; //그 다음 나올 문서 출력 순서를 갱신
                         }
 

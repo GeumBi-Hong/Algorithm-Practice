@@ -1,10 +1,12 @@
+package Class4;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
 import java.util.StringTokenizer;
 
-public class Main {
+public class Main15650 {
     static int N;
     static int M;
     static int []answer;

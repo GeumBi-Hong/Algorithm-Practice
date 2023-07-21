@@ -1,7 +1,5 @@
 package Gold;
 
-import com.sun.org.apache.xerces.internal.impl.dv.XSSimpleType;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;

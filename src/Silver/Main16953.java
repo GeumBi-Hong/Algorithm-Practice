@@ -41,7 +41,8 @@ public class Main16953 {
 
         while (A < B){
 
-            int num = B % 10;
+            int num = B % 10; //1의자리
+
             //[1] 1의자리가 1을 만나면 땐다.
             if(num == 1){
                 B /= 10;

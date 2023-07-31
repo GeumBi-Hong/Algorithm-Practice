@@ -23,7 +23,7 @@ import java.util.StringTokenizer;
  *
  * 그럼 안되는 경우는 ?
  * 뭐 일의자리가 1이아닌 홀수인경우는 어떤 경우라도 안되겠지 2를 곱하거나 1자리를 더하는 경우밖에 없으니까.
- *
+ *ㅇ
  *
  */
 public class Main16953 {

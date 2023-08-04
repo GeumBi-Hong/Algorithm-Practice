@@ -4,10 +4,9 @@ import java.util.*;
 import java.io.*;
 
 /**
- * 문제가 뭔 소리인지 모르겠음ㅋ
- * <p>
- * 개멍청하게 반조립이 절반의 반인줄ㅋ 걍 미완성 의미래
- * <p>
+
+ *  반조립이 절반의 반인줄 걍 미완성 의미
+
  * 실행시간 : 81ms 메모리 10.84Mb
  */
 public class 조립라인 {
@@ -30,6 +29,7 @@ public class 조립라인 {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st;
+
         int N = Integer.parseInt(br.readLine()); // 작업장 수
 
 
@@ -46,13 +46,16 @@ public class 조립라인 {
             workPlaceInfo.add(new Line(workA, workB, moveAtoB, moveBtoA));
 
         }
-
         st = new StringTokenizer(br.readLine());
+
         //마지막 AN BN 의 정보 입력하기
         workPlaceInfo.add(new Line(Integer.parseInt(st.nextToken()), Integer.parseInt(st.nextToken()), 0, 0));
 
 
-        //아 근까 이거네 내가 여기까지 왔는데 그 이후로는 이렇게 하는게 가장 빠르다는걸 알고있다는거네 그 전에 구한 값을 이용해서 이미 최소값을 아는거지
+        //Ai작업장으로 갔을 때의 최소 비용과 Bi로 갔을때의 최소비용을 계속 구해준다.
+        // Ai작업장으로 가는 경우는 이전의 B에서 오거나 이전의 A
+        // Bi작업장으로 가는 경우는 이전의 A에서 오거나 이전의 B  일거다.
+        // 이전의 A 이전의 B를 알려면 처음부터(1) 오면서 최소비용을 계속 갱신해 왔다면 이전의 B혹은 이전의 A값을 알아서 해당 값을 이용해서 계속 최솟값을 구할 수 있다.
 
         int[] dpA = new int[N];
         int[] dpB = new int[N];
@@ -62,6 +65,7 @@ public class 조립라인 {
 
 
         for (int i = 1; i < N; i++) {
+
             dpA[i] = Math.min(dpA[i - 1] + workPlaceInfo.get(i).workPlaceA, dpB[i - 1] + workPlaceInfo.get(i - 1).moveToA + workPlaceInfo.get(i).workPlaceA);
             dpB[i] = Math.min(dpB[i - 1] + workPlaceInfo.get(i).workPlaceB, dpA[i - 1] + workPlaceInfo.get(i - 1).moveToB + workPlaceInfo.get(i).workPlaceB);
 
